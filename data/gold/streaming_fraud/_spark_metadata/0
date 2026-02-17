@@ -1,0 +1,2 @@
+v1
+{"path":"file:///opt/spark-apps/data/gold/streaming_fraud/part-00000-6fffa1e9-bfc9-421e-a969-b00f0f8f3891-c000.snappy.parquet","size":1065,"isDir":false,"modificationTime":1771308774420,"blockReplication":1,"blockSize":33554432,"action":"add"}

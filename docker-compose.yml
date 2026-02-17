@@ -1,0 +1,11 @@
+services:
+  spark:
+    image: apache/spark:3.5.0
+    container_name: spark-container
+    ports:
+      - "4040:4040"
+      - "7077:7077"
+    volumes:
+      - ./:/opt/spark-apps
+    working_dir: /opt/spark-apps
+    command: tail -f /dev/null
