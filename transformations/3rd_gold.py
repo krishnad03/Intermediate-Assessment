@@ -74,8 +74,6 @@ regional_perf.write.mode("overwrite") \
 print("!! Regional performance ready !!")
 
 # 4️ Advanced Fraud Detection (Customer Spike Logic)
-
-
 customer_window = Window.partitionBy("customer_id").orderBy("transaction_date")
 
 fraud_df = (

@@ -41,7 +41,6 @@ windowed_revenue = (stream_df.withWatermark("event_time", "10 minutes").groupBy(
 # Real-time Fraud Flag (High Value)
 fraud_stream = (stream_df.withColumn("fraud_flag",when(col("amount") > 10000, "HIGH_VALUE").otherwise("NORMAL")).filter(col("fraud_flag") == "HIGH_VALUE"))
 
-
 # Write Streaming Output
 revenue_query = (
     windowed_revenue
