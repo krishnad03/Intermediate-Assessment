@@ -1,2 +1,0 @@
-v1
-{"path":"file:///opt/spark-apps/data/gold/streaming_revenue/part-00000-dec36eb1-18dc-4430-b02d-e1c363c767dd-c000.snappy.parquet","size":632,"isDir":false,"modificationTime":1771308786830,"blockReplication":1,"blockSize":33554432,"action":"add"}

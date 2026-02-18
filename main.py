@@ -1,16 +1,43 @@
-import os
-import subprocess
+from pyspark.sql import SparkSession
+from transformations.bronze_layer import run_bronze
+from transformations.silver_layer import run_silver
+from transformations.gold_layer import run_gold
+from transformations.warehouse_layer import run_warehouse
 
-print("1. Running Bronze Layer ")
-subprocess.run(["/opt/spark/bin/spark-submit", "transformations/1st_bronze.py"])
 
-print("2. Running Silver Layer ")
-subprocess.run(["/opt/spark/bin/spark-submit", "transformations/2nd_silver.py"])
+def run_pipeline():
 
-print("3. Loading Warehouse ")
-subprocess.run(["/opt/spark/bin/spark-submit", "transformations/4th_load_warehouse.py"])
+    spark = (
+        SparkSession.builder
+        .appName("FullBatchPipeline")
+        .getOrCreate()
+    )
 
-print("4. Running Gold Layer ")
-subprocess.run(["/opt/spark/bin/spark-submit", "transformations/3rd_gold.py"])
+    spark.sparkContext.setLogLevel("ERROR")
 
-print("!! Batch Pipeline Completed Successfully !!")
+    try:
+        print("Running Bronze")
+        run_bronze(spark)
+
+        print("Running Silver")
+        run_silver(spark)
+
+        print("Running Warehouse")
+        run_warehouse(spark)
+
+        print("Running Gold")
+        run_gold(spark)
+
+        print("Pipeline completed successfully")
+
+    except Exception as e:
+        print("Pipeline failed")
+        print(str(e))
+        raise
+
+    finally:
+        spark.stop()
+
+
+if __name__ == "__main__":
+    run_pipeline()
